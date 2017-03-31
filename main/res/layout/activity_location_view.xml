@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_location_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sridhama.com.locationmate.LocationViewActivity"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/female"
+            android:id="@+id/gender"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:layout_marginTop="25dp"
+        android:textSize="30dp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:text="Last Known Location: Apartment B11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/location"
+        />
+
+    <TextView
+        android:text="Last Seen: 7:51 PM (3 minutes ago)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/last_seen"/>
+        </LinearLayout>
+
+    </LinearLayout>
