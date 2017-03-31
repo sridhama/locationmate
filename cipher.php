@@ -45,3 +45,4 @@ return implode($hash);
 }
 
 // echo encrypt("3BDA79",$_SERVER['REQUEST_TIME']);
+// echo "\n".$_SERVER['REQUEST_TIME'];

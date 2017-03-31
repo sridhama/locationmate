@@ -82,6 +82,9 @@ function add_friend($username, $friend_code){
 }
 
 function are_friends($username, $friend_username){
+  if($username == $friend_username){
+    return false;
+  }
   $sql = "SELECT * FROM `friends_meta` WHERE `username` = '$username' AND `friend_username` = '$friend_username';";
   $rs = mysqli_query($GLOBALS['connection'], $sql);
   $num_rows = mysqli_num_rows($rs);
