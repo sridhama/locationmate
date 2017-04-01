@@ -42,8 +42,6 @@ public class BSSIDActivity extends AppCompatActivity {
     public void upload(View v){
         EditText location = (EditText)findViewById(R.id.location);
         String val = location.getText().toString().replace(" ","%20");
-//        System.out.println("HERE!!!: "+val);
-
         WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifi_info = wm.getConnectionInfo();
         String raw_BSSID = wifi_info.getBSSID();

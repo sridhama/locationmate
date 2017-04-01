@@ -29,7 +29,8 @@
 
         <service android:name=".LMService" />
 
-        <activity android:name=".BSSIDActivity"></activity>
+        <activity android:name=".BSSIDActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

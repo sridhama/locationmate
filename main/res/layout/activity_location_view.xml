@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/avatar"
-            android:id="@+id/gender"/>
+            android:id="@+id/gender_img"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

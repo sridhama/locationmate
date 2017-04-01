@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +24,12 @@ public class LocationViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_view);
         final String friend_name = getIntent().getStringExtra("name");
         String friend_username = getIntent().getStringExtra("friend_username");
-//        String username = getIntent().getStringExtra("username");
-//        get_data(name, friend_username);
+//        String gender_bool = getIntent().getStringExtra("friend_gender");
+//        char x = gender_bool.charAt(0);
+//        System.out.println("GENDERBOOL: "+ gender_bool);
+
+        ImageView iv = new ImageView(R.id.gender_img);
+        iv.setImageDrawable();
 
         final Intent i = new Intent(this, HomeActivity.class);
 
@@ -38,7 +43,7 @@ public class LocationViewActivity extends AppCompatActivity {
                 name_view.setText(friend_name);
                 int start = response.indexOf("<br>");
                 location.setText("Last Known Location: "+response.substring(0,start));
-                last_seen.setText("Last Seen: "+response.substring(start+4));
+                last_seen.setText(response.substring(start+4));
             }
         }, new Response.ErrorListener() {
             @Override

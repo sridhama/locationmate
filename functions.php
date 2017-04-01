@@ -38,15 +38,30 @@ function get_time($username, $friend_username){
 }
 
 function days_since($date){
-  $daysleft = $date - $_SERVER['REQUEST_TIME'];
-  return $days = floor($daysleft/86400);
+  $daysleft = $_SERVER['REQUEST_TIME'] - $date;
+  $days = floor($daysleft/86400);
+  return $days;
+}
+
+function minutes_since($timestamp){
+  return floor(($_SERVER['REQUEST_TIME'] - $timestamp)/60);
 }
 
 function get_date($timestamp){
-  if(days_since($timestamp) != 0){
-    return date("M d, H:i:s", $timestamp);
+  $days_since = days_since($timestamp);
+  if($days_since != 0){
+    return "Last seen ".$days_since." days ago at ".date("g:i a", $timestamp);
+  }else if($days_since == 1){
+      return "Last seen yesterday at ".date("g:i a", $timestamp);
   }else{
-    return date("H:i", $timestamp);
+    $minutes_since = minutes_since($timestamp);
+    if($minutes_since > 0 && $minutes_since< 59){
+    return "Last seen today at ".date("g:i a", $timestamp)." ($minutes_since minutes ago)";
+  }else if($minutes_since == 0){
+    return "Last seen just now";
+  }else{
+    return "Last seen today at ".date("g:i a", $timestamp);
+  }
   }
 }
 

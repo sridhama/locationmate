@@ -24,15 +24,10 @@ public class HomeActivity extends AppCompatActivity {
 
     GridView androidGridView;
 
-//    String[] gridViewString = {"Yashwanth Soodini","Swaran Mudumbi"};
-//    String[] usernameString = {"yashwanth", "arsenal"};
-//    int[] gridViewImageId = {R.drawable.female, R.drawable.male};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
 
 
         String url = "http://"+Constants.DOMAIN+"/LocationMate/view_friends.php?username="+Constants.USERNAME;
@@ -40,7 +35,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
         String result = response.toString();
-//        String result = "{\"names\":[\"Swaran M\",\"Yashwanth Soodini\",\"John Doe\"],\"usernames\":[\"arsenal\",\"yashwanth\",\"john\"],\"genders\":[\"0\",\"1\",\"0\"]}";
         // parsing JSON
         try {
             JSONObject jObject = new JSONObject(result);
@@ -63,13 +57,13 @@ public class HomeActivity extends AppCompatActivity {
 
 
             JSONArray jArray2 = jObject.getJSONArray("genders");
-            ArrayList<Integer> genderdata = new ArrayList<Integer>();
+            final ArrayList<Integer> genderdata = new ArrayList<Integer>();
             if (jArray2 != null) {
                 for (int k = 0; k < jArray2.length(); k++) {
                     genderdata.add(jArray2.getInt(k));
                 }
             }
-            int[] gridViewImageId = new int[genderdata.size()];
+            final int[] gridViewImageId = new int[genderdata.size()];
 
             for (int k = 0; k < genderdata.size(); k++) {
                 int val = genderdata.get(k);
@@ -91,8 +85,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(getBaseContext(), LocationViewActivity.class);
                     intent.putExtra("name", gridViewString[+i]);
                     intent.putExtra("friend_username", usernameString[+i]);
-                    // change username dynamically
-//                    intent.putExtra("username", "sridhama");
+                    intent.putExtra("friend_gender", genderdata.get(i));
                     startActivity(intent);
                 }
             });
@@ -110,29 +103,5 @@ public class HomeActivity extends AppCompatActivity {
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
 //        // END VOLLEY
     }
-
-
-//    public String view_friends(){
-//         // START VOLLEY
-//        String url = "http://"+Constants.DOMAIN+"/LocationMate/view_friends.php?username="+Constants.USERNAME;
-//        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//
-//
-//
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getApplicationContext(), "Network Error.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
-////        // END VOLLEY
-//
-//    }
-
 
 }

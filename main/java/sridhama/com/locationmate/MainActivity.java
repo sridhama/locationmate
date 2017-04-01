@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tempIntent1(View v) {
-        Intent i = new Intent(this, SignupActivity.class);
+        Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
 
     }
