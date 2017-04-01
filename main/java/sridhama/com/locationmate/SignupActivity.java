@@ -43,14 +43,14 @@ public class SignupActivity extends Activity {
         EditText lname = (EditText)findViewById(R.id.lname);
         EditText username = (EditText)findViewById(R.id.username);
         // START VOLLEY
-        String url = "http://10.7.20.61/LocationMate/add_user.php?fname="+fname.getText()+"&lname="+lname.getText()+"&username="+username.getText()+"&gender=0";
+        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?fname="+fname.getText()+"&lname="+lname.getText()+"&username="+username.getText()+"&gender=0";
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 //                TextView tv = (TextView)findViewById(R.id.sri);
 //                tv.setText(response);
                 if(response.toString().equals("SUCCESS")){
-                    System.out.println("yes!");
+
                 }
             }
         }, new Response.ErrorListener() {

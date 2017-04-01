@@ -32,7 +32,7 @@ public class AddFriendActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                update_hash("4B059F",code);
+                                update_hash(Constants.SECRET_KEY,code);
                             }
                         });
                         Thread.sleep(1000);
@@ -43,8 +43,6 @@ public class AddFriendActivity extends AppCompatActivity {
         };
         t.start();
         // Ends here
-
-
 
     }
 
@@ -73,7 +71,7 @@ public class AddFriendActivity extends AppCompatActivity {
         return String.valueOf(hash);
     }
     public void update_hash(String secret,TextView code) {
-        Long tsLong = System.currentTimeMillis() / 1000;
+        Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
         code.setText(generate_hash(secret, ts));
     }
@@ -81,8 +79,7 @@ public class AddFriendActivity extends AppCompatActivity {
     public void pair(final View v){
         EditText friend_code = (EditText) findViewById(R.id.friend_code);
         String friend_codeText = friend_code.getText().toString();
-        String username = "sridhama";
-        String url = "http://10.7.20.61/LocationMate/add_friend.php?username="+username+"&friend_code="+friend_codeText;
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/add_friend.php?username="+Constants.USERNAME+"&friend_code="+friend_codeText;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

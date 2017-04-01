@@ -8,3 +8,4 @@ if(!$connection){
   die("Connection error" . mysqli_error($connection));
 }
 $GLOBALS['connection'] = $connection;
+date_default_timezone_set("Asia/Kolkata");

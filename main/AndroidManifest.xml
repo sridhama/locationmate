@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,8 +25,11 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity android:name=".AddFriendActivity"></activity>
-        <service android:name="LMService"/>
+        <activity android:name=".AddFriendActivity" />
+
+        <service android:name=".LMService" />
+
+        <activity android:name=".BSSIDActivity"></activity>
     </application>
 
 </manifest>

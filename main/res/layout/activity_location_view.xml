@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/female"
+            android:src="@drawable/avatar"
             android:id="@+id/gender"/>
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         android:textAllCaps="false" />
 
     <TextView
-        android:text="Last Known Location: Apartment B11"
+        android:text="Determining..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -39,7 +39,6 @@
         />
 
     <TextView
-        android:text="Last Seen: 7:51 PM (3 minutes ago)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
