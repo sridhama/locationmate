@@ -1,6 +1,7 @@
 package sridhama.com.locationmate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +33,9 @@ public class AddFriendActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                update_hash(Constants.SECRET_KEY,code);
+                                SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+                                final String STORED_SECRET_KEY = userDetails.getString("secret_key", "");
+                                update_hash(STORED_SECRET_KEY,code);
                             }
                         });
                         Thread.sleep(1000);
@@ -57,7 +60,7 @@ public class AddFriendActivity extends AppCompatActivity {
             ascii_val = (int) secret.charAt(i);
             if (ascii_val < 65) {
                 temp_val = salt + ((int) secret.charAt(i) - 48);
-                System.out.println(temp_val);
+//                System.out.println(temp_val);
                 temp = (char) (48 + temp_val % 10);
             } else {
                 sum = salt + ascii_val;
@@ -79,7 +82,11 @@ public class AddFriendActivity extends AppCompatActivity {
     public void pair(final View v){
         EditText friend_code = (EditText) findViewById(R.id.friend_code);
         String friend_codeText = friend_code.getText().toString();
-        String url = "http://"+Constants.DOMAIN+"/LocationMate/add_friend.php?username="+Constants.USERNAME+"&friend_code="+friend_codeText;
+
+        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        final String STORED_USERNAME = userDetails.getString("username", "");
+
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/add_friend.php?username="+STORED_USERNAME+"&friend_code="+friend_codeText;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

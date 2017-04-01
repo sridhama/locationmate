@@ -2,6 +2,7 @@ package sridhama.com.locationmate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
@@ -36,13 +37,22 @@ public class RegisterActivity extends AppCompatActivity {
             final Intent intent = new Intent(getBaseContext(), HomeActivity.class);
         EditText fname = (EditText)findViewById(R.id.fname);
         EditText lname = (EditText)findViewById(R.id.lname);
-        EditText username = (EditText)findViewById(R.id.username);
+        final EditText username = (EditText)findViewById(R.id.username);
         // START VOLLEY
         String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?fname="+fname.getText()+"&lname="+lname.getText()+"&username="+username.getText()+"&gender=0"+"&bssid="+BSSID;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.toString().equals("SUCCESS")){
+                if(response.toString().substring(0,7).equals("SUCCESS")){
+
+//                    Constants.SECRET_KEY = response.toString().substring(7);
+//                    String username = username.getText();
+                    SharedPreferences sharedPref = getSharedPreferences("user_data",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("username",username.getText().toString());
+                    editor.putString("secret_key",response.toString().substring(7));
+                    editor.putString("is_registered","1");
+                    editor.commit();
                     startActivity(intent);
                     finish();
                 }else if(response.toString().equals("USERNAME_EXISTS")){

@@ -3,6 +3,7 @@ package sridhama.com.locationmate;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
@@ -61,11 +62,15 @@ public class LMService extends Service {
         }catch (Exception e){
             return;
         }
-        String url = "http://10.7.20.61/LocationMate/update.php?username="+username+"&bssid="+bssid;
+
+        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        final String STORED_USERNAME = userDetails.getString("username", "");
+
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/update.php?username="+STORED_USERNAME+"&bssid="+bssid;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("updated BSSID!!!");
+//                System.out.println("updated BSSID!!!");
             }
         }, new Response.ErrorListener() {
             @Override

@@ -1,6 +1,7 @@
 package sridhama.com.locationmate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -29,8 +30,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        final String STORED_USERNAME = userDetails.getString("username", "");
 
-        String url = "http://"+Constants.DOMAIN+"/LocationMate/view_friends.php?username="+Constants.USERNAME;
+
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/view_friends.php?username="+STORED_USERNAME;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

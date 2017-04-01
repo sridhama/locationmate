@@ -2,6 +2,7 @@ package sridhama.com.locationmate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,12 +29,15 @@ public class LocationViewActivity extends AppCompatActivity {
 //        char x = gender_bool.charAt(0);
 //        System.out.println("GENDERBOOL: "+ gender_bool);
 
-        ImageView iv = new ImageView(R.id.gender_img);
-        iv.setImageDrawable();
+//        ImageView iv = new ImageView(R.id.gender_img);
+//        iv.setImageDrawable();
 
         final Intent i = new Intent(this, HomeActivity.class);
 
-        String url = "http://"+Constants.DOMAIN+"/LocationMate/data.php?username="+Constants.USERNAME+"&friend_username="+friend_username;
+        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        final String STORED_USERNAME = userDetails.getString("username", "");
+
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/data.php?username="+STORED_USERNAME+"&friend_username="+friend_username;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

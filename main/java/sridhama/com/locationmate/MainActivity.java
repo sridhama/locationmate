@@ -2,6 +2,7 @@ package sridhama.com.locationmate;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,56 +32,17 @@ public class MainActivity extends AppCompatActivity {
         startService(i);
         // SERVICE END
 
-
-//        String result = "{\"names\":[\"Swaran M\",\"Yashwanth Soodini\",\"John Doe\"],\"usernames\":[\"arsenal\",\"yashwanth\",\"john\"],\"genders\":[\"0\",\"1\",\"0\"]}";
-//        try {
-//            JSONObject jObject = new JSONObject(result);
-//
-//            JSONArray jArray = jObject.getJSONArray("names");
-//            ArrayList<String> listdata = new ArrayList<String>();
-//            if (jArray != null) {
-//                for (int k=0;k<jArray.length();k++){
-//                    listdata.add(jArray.getString(k));
-//                }
-//            }
-//            String[] gridViewString = listdata.toArray(new String[0]);
-//            JSONArray jArray1 = jObject.getJSONArray("usernames");
-//            ArrayList<String> usernamedata = new ArrayList<String>();
-//            if (jArray1 != null) {
-//                for (int k=0;k<jArray1.length();k++){
-//                    usernamedata.add(jArray1.getString(k));
-//                }
-//            }
-//            String[] usernameString = usernamedata.toArray(new String[0]);
-//
-//
-//            JSONArray jArray2 = jObject.getJSONArray("genders");
-//            ArrayList<Integer> genderdata = new ArrayList<Integer>();
-//            if (jArray2 != null) {
-//                for (int k=0;k<jArray2.length();k++){
-//                    genderdata.add(jArray2.getInt(k));
-//                }
-//            }
-////            int[] genderarray = genderdata.toArray(new int[0]);
-//            int[] gridViewImageId = new int[genderdata.size()];
-//
-//            for(int k = 0; k < genderdata.size();k++){
-//                int val = genderdata.get(k);
-//                if(val == 0){
-//                    gridViewImageId[k] = R.drawable.male;
-//                }else{
-//                    gridViewImageId[k] = R.drawable.female;
-//                }
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
-
+        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        final String REGISTER_STATUS = userDetails.getString("is_registered", "");
+        if(REGISTER_STATUS.equals("1")){
+            Intent intent1 = new Intent(this, HomeActivity.class);
+            startActivity(intent1);
+//            finish();
+        }else{
+            Intent intent2 = new Intent(this, RegisterActivity.class);
+            startActivity(intent2);
+            finish();
+        }
     }
 
     public void tempIntent(View v) {
