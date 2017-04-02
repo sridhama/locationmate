@@ -25,12 +25,14 @@ public class LocationViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_view);
         final String friend_name = getIntent().getStringExtra("name");
         String friend_username = getIntent().getStringExtra("friend_username");
-//        String gender_bool = getIntent().getStringExtra("friend_gender");
-//        char x = gender_bool.charAt(0);
-//        System.out.println("GENDERBOOL: "+ gender_bool);
+        String gender_bool = getIntent().getStringExtra("friend_gender");
 
-//        ImageView iv = new ImageView(R.id.gender_img);
-//        iv.setImageDrawable();
+        ImageView iv = (ImageView)findViewById(R.id.gender_img);
+        if(gender_bool.equals("0")) {
+            iv.setImageResource(R.drawable.male);
+        }else{
+            iv.setImageResource(R.drawable.female);
+        }
 
         final Intent i = new Intent(this, HomeActivity.class);
 

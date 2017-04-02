@@ -25,13 +25,14 @@ public class LMService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         System.out.println("STANDALONE SERVICE STARTED!!!!");
-        Timer t = new Timer( );
+        Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                String username = "sridhama";
-                update_bssid(username);
-                System.out.println("updated");
+                SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+                final String STORED_USERNAME = userDetails.getString("username", "");
+//                final String STORED_BSSID = userDetails.getString("last_bssid", "");
+                update_bssid(STORED_USERNAME);
             }
         }, 1000,60000);
         return Service.START_STICKY;
@@ -55,14 +56,16 @@ public class LMService extends Service {
         return BSSID;
     }
 
-    public void update_bssid(String username){
+    public void update_bssid(String username/* ,final String last_bssid*/){
         String bssid;
         try {
             bssid = getBSSID();
         }catch (Exception e){
             return;
         }
-
+//        if(bssid.equals(last_bssid)){
+//            return;
+//        }
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_USERNAME = userDetails.getString("username", "");
 
@@ -70,7 +73,11 @@ public class LMService extends Service {
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                System.out.println("updated BSSID!!!");
+//                SharedPreferences sharedPref = getSharedPreferences("user_data",Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPref.edit();
+//                editor.putString("last_bssid",last_bssid);
+//                editor.commit();
+
             }
         }, new Response.ErrorListener() {
             @Override

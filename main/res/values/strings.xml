@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">LocationMate</string>
-    <string name="title_activity_signup">SignupActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_temp">tempActivity</string>
+    <string name="title_activity_home">LocationMate</string>
 </resources>

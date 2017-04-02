@@ -4,6 +4,10 @@ $username = $_GET['username'];
   $sql = "SELECT a.fname, a.lname, a.username, a.gender FROM users a, friends_meta b WHERE a.username = b.friend_username AND b.username = '$username';";
 $body = "";
 $rs = mysqli_query($GLOBALS['connection'],$sql);
+if(mysqli_num_rows($rs) == 0){
+  echo "NO_FRIENDS";
+  return;
+}
 $names = array();
 $usernames = array();
 $genders = array();

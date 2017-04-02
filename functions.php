@@ -13,6 +13,9 @@ function get_location($username, $friend_username){
   while($row = mysqli_fetch_assoc($rs)){
     $location = $row['location'];
   }
+  if($location == ""){
+    return "Unmapped Location";
+  }
   return $location;
   }else{
   return "ERROR";
@@ -55,7 +58,7 @@ function get_date($timestamp){
       return "Last seen yesterday at ".date("g:i a", $timestamp);
   }else{
     $minutes_since = minutes_since($timestamp);
-    if($minutes_since > 0 && $minutes_since< 59){
+    if($minutes_since > 0 && $minutes_since < 59){
     return "Last seen today at ".date("g:i a", $timestamp)." ($minutes_since minutes ago)";
   }else if($minutes_since == 0){
     return "Last seen just now";

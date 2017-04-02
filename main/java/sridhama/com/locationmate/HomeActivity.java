@@ -30,17 +30,24 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_USERNAME = userDetails.getString("username", "");
-
+        final TextView tv = (TextView)findViewById(R.id.message);
 
         String url = "http://"+Constants.DOMAIN+"/LocationMate/view_friends.php?username="+STORED_USERNAME;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
         String result = response.toString();
+                if(result.equals("NO_FRIENDS")){
+                    tv.setText("Add friends to get started!");
+                    return;
+                }
         // parsing JSON
         try {
+            tv.setVisibility(View.GONE);
             JSONObject jObject = new JSONObject(result);
             JSONArray jArray = jObject.getJSONArray("names");
             ArrayList<String> listdata = new ArrayList<String>();
@@ -89,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(getBaseContext(), LocationViewActivity.class);
                     intent.putExtra("name", gridViewString[+i]);
                     intent.putExtra("friend_username", usernameString[+i]);
-                    intent.putExtra("friend_gender", genderdata.get(i));
+                    intent.putExtra("friend_gender", String.valueOf(genderdata.get(+i)));
                     startActivity(intent);
                 }
             });
