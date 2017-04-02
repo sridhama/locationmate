@@ -27,7 +27,11 @@
         <service android:name=".LMService" />
 
         <activity android:name=".BSSIDActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".ViewFriendsActivity"
+            android:label="@string/title_activity_view_friends"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

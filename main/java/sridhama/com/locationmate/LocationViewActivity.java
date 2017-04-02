@@ -34,7 +34,7 @@ public class LocationViewActivity extends AppCompatActivity {
             iv.setImageResource(R.drawable.female);
         }
 
-        final Intent i = new Intent(this, HomeActivity.class);
+        final Intent i = new Intent(this, ViewFriendsActivity.class);
 
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_USERNAME = userDetails.getString("username", "");

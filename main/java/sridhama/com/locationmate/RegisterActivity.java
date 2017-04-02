@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
             String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 3);
 
 
-            final Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+            final Intent intent = new Intent(getBaseContext(), ViewFriendsActivity.class);
         EditText fname = (EditText)findViewById(R.id.fname);
         EditText lname = (EditText)findViewById(R.id.lname);
             String gender = "";
@@ -45,10 +45,12 @@ public class RegisterActivity extends AppCompatActivity {
             if(selectedId == -1){
                 Toast.makeText(getApplicationContext(), "Select a gender.", Toast.LENGTH_SHORT).show();
                 return;
-            }else if(selectedId == 2131558552){
-                gender = "0";
-            }else{
+            }
+            RadioButton selectedButton = (RadioButton)findViewById(selectedId);
+            if(selectedButton.getText().equals("Female")){
                 gender = "1";
+            }else{
+                gender = "0";
             }
             // START VOLLEY
         String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?fname="+fname.getText()+"&lname="+lname.getText()+"&username="+username.getText()+"&gender="+gender+"&bssid="+BSSID;

@@ -61,4 +61,15 @@
         android:layout_marginTop="37dp"
         android:id="@+id/button3"
         android:onClick="homeIntent" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/signup"
+        android:layout_toRightOf="@+id/button"
+        android:layout_toEndOf="@+id/button"
+        android:layout_marginBottom="35dp"
+        android:id="@+id/button7"
+        android:onClick="viewfriends" />
 </RelativeLayout>

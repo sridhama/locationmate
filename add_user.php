@@ -8,14 +8,16 @@ $username = strtolower(mysqli_real_escape_string($GLOBALS['connection'],$_GET['u
 
 if(strlen($fname) < 2 || strlen($fname)>32){
   echo "Invalid First Name.";
-}else if(strlen($lname) < 2 || strlen($lname)>32){
+}else if(strlen($lname) < 1 || strlen($lname)>32){
   echo "Invalid Last Name.";
 }else if(strlen($gender)!=1){
   echo "Select Gender.";
-}else if(strlen($username) > 16){
+}else if(strlen($username) > 32){
   echo "Username too long.";
-}else if(strlen($username) < 4){
+}else if(strlen($username) < 2){
   echo "Username too short.";
+}else if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $username)){
+  echo "Invalid Username.";
 }
 
 else{

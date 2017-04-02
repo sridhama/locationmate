@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String REGISTER_STATUS = userDetails.getString("is_registered", "");
         if(REGISTER_STATUS.equals("1")){
-            Intent intent1 = new Intent(this, HomeActivity.class);
+            Intent intent1 = new Intent(this, ViewFriendsActivity.class);
             startActivity(intent1);
 //            finish();
         }else{
@@ -63,26 +63,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void homeIntent(View v) {
-        Intent i = new Intent(this, HomeActivity.class);
+
+
+    public void viewfriends(View v) {
+        Intent i = new Intent(this, ViewFriendsActivity.class);
         startActivity(i);
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                System.out.println("SETTINGS_BUTTON");
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
 
 
 }

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">LocationMate</string>
     <string name="title_activity_home">LocationMate</string>
+    <string name="title_activity_view_friends">LocationMate</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
