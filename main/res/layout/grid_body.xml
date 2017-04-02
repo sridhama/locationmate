@@ -4,18 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="12.5dp"
+    android:paddingBottom="12.dp"
+    >
 
     <ImageView
         android:id="@+id/android_gridview_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
 
     <TextView
         android:id="@+id/android_gridview_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textAlignment="center"
+        />
 </LinearLayout>

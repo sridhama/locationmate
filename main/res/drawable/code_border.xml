@@ -14,7 +14,6 @@
         android:dashWidth="3px"
         android:dashGap="10px"
         >
-
     </stroke>
 
     <!-- The radius makes the corners rounded -->

@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="First Name:"
+        android:text="Name:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/fname"
+        android:id="@+id/name_reg"
         android:hint="e.g. John"
         android:layout_below="@+id/fname_text"
         android:layout_alignParentLeft="true"
@@ -45,35 +45,10 @@
 
 
     <TextView
-        android:text="Last Name:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fname"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="11dp"
-        android:id="@+id/lname_text" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/lname"
-        android:hint="e.g. Doe"
-        android:layout_below="@+id/lname_text"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-
-
-    <TextView
         android:text="Username:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lname"
+        android:layout_below="@+id/name_reg"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
@@ -120,18 +95,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/femalerb"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginLeft="150sp" />
 
     </RadioGroup>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button6"
-        android:layout_below="@id/genderRadio"
-        android:layout_centerHorizontal="true"
         android:text="Signup"
-        android:onClick="signupfunc"/>
+        android:onClick="signupfunc"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:text="By signing up you agree to the Terms and Conditions. Use at your own discretion."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/genderRadio"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

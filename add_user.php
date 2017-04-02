@@ -1,16 +1,23 @@
 <?php
 require("./config.php");
-$fname = ucfirst(mysqli_real_escape_string($GLOBALS['connection'],$_GET['fname']));
-$lname = ucfirst(mysqli_real_escape_string($GLOBALS['connection'],$_GET['lname']));
+$name = ucwords(mysqli_real_escape_string($GLOBALS['connection'],$_GET['name']));
+// $lname = ucfirst(mysqli_real_escape_string($GLOBALS['connection'],$_GET['lname']));
 $gender = intval($_GET['gender']);
 $bssid = $_GET['bssid'];
 $username = strtolower(mysqli_real_escape_string($GLOBALS['connection'],$_GET['username']));
 
-if(strlen($fname) < 2 || strlen($fname)>32){
-  echo "Invalid First Name.";
-}else if(strlen($lname) < 1 || strlen($lname)>32){
-  echo "Invalid Last Name.";
-}else if(strlen($gender)!=1){
+if(strlen($name) < 2 || strlen($name)>32){
+  echo "Invalid Name.";
+}
+else if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $name)){
+  echo "Invalid Username.";
+}
+
+// else if(strlen($lname) < 1 || strlen($lname)>32){
+//   echo "Invalid Last Name.";
+// }
+
+else if(strlen($gender)!=1){
   echo "Select Gender.";
 }else if(strlen($username) > 32){
   echo "Username too long.";
@@ -35,7 +42,7 @@ $search_result = mysqli_query($GLOBALS['connection'], $search_sql);
 $rows = mysqli_num_rows($search_result);
 }while($rows != 0);
 $time = $_SERVER['REQUEST_TIME'];
-$sql = "INSERT INTO `users` (`fname`,`lname`,`gender`,`username`,`secret_key`, `last_bssid`, `last_seen`) VALUES ('$fname','$lname',$gender,'$username','$secret_key','$bssid','$time');";
+$sql = "INSERT INTO `users` (`name`,`gender`,`username`,`secret_key`, `last_bssid`, `last_seen`) VALUES ('$name',$gender,'$username','$secret_key','$bssid','$time');";
 $rs = mysqli_query($GLOBALS['connection'],$sql);
 if($rs){
   echo "SUCCESS".$secret_key;

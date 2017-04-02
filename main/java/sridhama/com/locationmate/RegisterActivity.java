@@ -36,8 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 
             final Intent intent = new Intent(getBaseContext(), ViewFriendsActivity.class);
-        EditText fname = (EditText)findViewById(R.id.fname);
-        EditText lname = (EditText)findViewById(R.id.lname);
+        EditText name = (EditText)findViewById(R.id.name_reg);
+//        EditText lname = (EditText)findViewById(R.id.lname);
             String gender = "";
         final EditText username = (EditText)findViewById(R.id.username);
             RadioGroup rg = (RadioGroup) findViewById(R.id.genderRadio);
@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                 gender = "0";
             }
             // START VOLLEY
-        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?fname="+fname.getText()+"&lname="+lname.getText()+"&username="+username.getText()+"&gender="+gender+"&bssid="+BSSID;
+        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?name="+name.getText().toString().replace(" ","%20")+"&username="+username.getText()+"&gender="+gender+"&bssid="+BSSID;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -13,7 +13,7 @@
 
 
     <TextView
-        android:text="Your Pairing Code:"
+        android:text="Your Unique Pairing Code:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -92,7 +92,7 @@
         android:layout_marginTop="10dp"
         android:id="@+id/pair_button"/>
         <TextView
-            android:text="Enter your friend's code above to pair."
+            android:text="Enter your friend's code to pair."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

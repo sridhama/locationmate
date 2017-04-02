@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LocationViewActivity"
-            android:label="Friend Location"/>
+            android:label="View Location"/>
 
         <activity android:name=".AddFriendActivity"
             android:label="@string/title_activity_add_friend"/>
