@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -37,16 +38,24 @@ public class RegisterActivity extends AppCompatActivity {
             final Intent intent = new Intent(getBaseContext(), HomeActivity.class);
         EditText fname = (EditText)findViewById(R.id.fname);
         EditText lname = (EditText)findViewById(R.id.lname);
+            String gender = "";
         final EditText username = (EditText)findViewById(R.id.username);
-        // START VOLLEY
-        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?fname="+fname.getText()+"&lname="+lname.getText()+"&username="+username.getText()+"&gender=0"+"&bssid="+BSSID;
+            RadioGroup rg = (RadioGroup) findViewById(R.id.genderRadio);
+            int selectedId = rg.getCheckedRadioButtonId();
+            if(selectedId == -1){
+                Toast.makeText(getApplicationContext(), "Select a gender.", Toast.LENGTH_SHORT).show();
+                return;
+            }else if(selectedId == 2131558552){
+                gender = "0";
+            }else{
+                gender = "1";
+            }
+            // START VOLLEY
+        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?fname="+fname.getText()+"&lname="+lname.getText()+"&username="+username.getText()+"&gender="+gender+"&bssid="+BSSID;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().substring(0,7).equals("SUCCESS")){
-
-//                    Constants.SECRET_KEY = response.toString().substring(7);
-//                    String username = username.getText();
                     SharedPreferences sharedPref = getSharedPreferences("user_data",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("username",username.getText().toString());
@@ -60,6 +69,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                 }
+
+
+
+
+
             }
         }, new Response.ErrorListener() {
             @Override

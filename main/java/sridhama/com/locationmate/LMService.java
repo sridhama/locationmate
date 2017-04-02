@@ -31,7 +31,6 @@ public class LMService extends Service {
             public void run() {
                 SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
                 final String STORED_USERNAME = userDetails.getString("username", "");
-//                final String STORED_BSSID = userDetails.getString("last_bssid", "");
                 update_bssid(STORED_USERNAME);
             }
         }, 1000,60000);
@@ -56,16 +55,13 @@ public class LMService extends Service {
         return BSSID;
     }
 
-    public void update_bssid(String username/* ,final String last_bssid*/){
+    public void update_bssid(String username){
         String bssid;
         try {
             bssid = getBSSID();
         }catch (Exception e){
             return;
         }
-//        if(bssid.equals(last_bssid)){
-//            return;
-//        }
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_USERNAME = userDetails.getString("username", "");
 
@@ -73,10 +69,6 @@ public class LMService extends Service {
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                SharedPreferences sharedPref = getSharedPreferences("user_data",Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPref.edit();
-//                editor.putString("last_bssid",last_bssid);
-//                editor.commit();
 
             }
         }, new Response.ErrorListener() {
