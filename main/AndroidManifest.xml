@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -18,20 +20,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LocationViewActivity"
-            android:label="View Location"/>
-
-        <activity android:name=".AddFriendActivity"
-            android:label="@string/title_activity_add_friend"/>
+        <activity
+            android:name=".LocationViewActivity"
+            android:label="View Location" />
+        <activity
+            android:name=".AddFriendActivity"
+            android:label="@string/title_activity_add_friend" />
 
         <service android:name=".LMService" />
 
-        <activity android:name=".BSSIDActivity"
-            android:label="Add Location"/>
+        <activity
+            android:name=".BSSIDActivity"
+            android:label="Add Location" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".ViewFriendsActivity"
             android:label="@string/title_activity_view_friends"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".NoWifiActivity"></activity>
     </application>
+
 </manifest>

@@ -1,8 +1,11 @@
 package sridhama.com.locationmate;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,49 +31,55 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // SERVICE START
-        Intent i= new Intent(this, LMService.class);
-        startService(i);
-        // SERVICE END
 
-        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-        final String REGISTER_STATUS = userDetails.getString("is_registered", "");
-        if(REGISTER_STATUS.equals("1")){
-            Intent intent1 = new Intent(this, ViewFriendsActivity.class);
-            startActivity(intent1);
-//            finish();
-        }else{
-            Intent intent2 = new Intent(this, RegisterActivity.class);
-            startActivity(intent2);
+
+
+        // check wifi status
+        if(!wifiStatus()){
+            Intent i= new Intent(this, NoWifiActivity.class);
+            startActivity(i);
             finish();
-        }
-    }
+        }else {
+            // SERVICE START
+            Intent service_LM = new Intent(this, LMService.class);
+            startService(service_LM);
+            // SERVICE END
+            SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+            final String REGISTER_STATUS = userDetails.getString("is_registered", "");
+            if (REGISTER_STATUS.equals("1")) {
 
-    public void tempIntent(View v) {
-        Intent i = new Intent(this, BSSIDActivity.class);
-        startActivity(i);
+                Intent intent1 = new Intent(this, ViewFriendsActivity.class);
+                startActivity(intent1);
+//            finish();
+            } else {
+                Intent intent2 = new Intent(this, RegisterActivity.class);
+                startActivity(intent2);
+                finish();
+            }
+
+        }
+
     }
 
     public void tempIntent1(View v) {
         Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
-
     }
 
-    public void addFriendIntent(View v) {
-        Intent i = new Intent(this, AddFriendActivity.class);
-        startActivity(i);
-
-    }
-
-
-
-    public void viewfriends(View v) {
+    public void viewfriends(View view){
         Intent i = new Intent(this, ViewFriendsActivity.class);
         startActivity(i);
-
     }
 
+    public boolean wifiStatus(){
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (mWifi.isConnected()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
 }

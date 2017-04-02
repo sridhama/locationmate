@@ -78,11 +78,12 @@
         android:id="@+id/gender_text" />
 
     <RadioGroup
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/gender_text"
         android:orientation="horizontal"
-        android:id="@+id/genderRadio">
+        android:id="@+id/genderRadio"
+        android:gravity="center_horizontal">
 
         <RadioButton
             android:text="Male"
@@ -96,7 +97,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/femalerb"
             android:layout_weight="1"
-            android:layout_marginLeft="150sp" />
+            />
 
     </RadioGroup>
 
@@ -104,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button6"
-        android:text="Signup"
+        android:text="Sign Up"
         android:onClick="signupfunc"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"

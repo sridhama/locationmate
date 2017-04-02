@@ -1,7 +1,10 @@
 package sridhama.com.locationmate;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,13 +32,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ViewFriendsActivity extends AppCompatActivity{
+public class ViewFriendsActivity extends AppCompatActivity {
     GridView androidGridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friends);
+
+if(!wifiStatus()) {
+    Intent i= new Intent(this, NoWifiActivity.class);
+    startActivity(i);
+    finish();
+}else{
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final Intent addfriendintent = new Intent(this, AddFriendActivity.class);
@@ -51,14 +61,14 @@ public class ViewFriendsActivity extends AppCompatActivity{
         // START OLD CODE
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_USERNAME = userDetails.getString("username", "");
-        final TextView tv = (TextView)findViewById(R.id.message);
+        final TextView tv = (TextView) findViewById(R.id.message);
 
-        String url = "http://"+Constants.DOMAIN+"/LocationMate/view_friends.php?username="+STORED_USERNAME;
+        String url = "http://" + Constants.DOMAIN + "/LocationMate/view_friends.php?username=" + STORED_USERNAME;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 String result = response.toString();
-                if(result.equals("NO_FRIENDS")){
+                if (result.equals("NO_FRIENDS")) {
                     tv.setText("Add friends to get started!");
                     return;
                 }
@@ -118,7 +128,7 @@ public class ViewFriendsActivity extends AppCompatActivity{
                             startActivity(intent);
                         }
                     });
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -133,6 +143,9 @@ public class ViewFriendsActivity extends AppCompatActivity{
         // END OLD CODE
 
     }
+
+
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,6 +180,16 @@ public class ViewFriendsActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean wifiStatus(){
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (mWifi.isConnected()) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

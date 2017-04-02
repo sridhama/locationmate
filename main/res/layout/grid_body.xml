@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingTop="12.5dp"
-    android:paddingBottom="12.dp"
+    android:paddingBottom="12.5dp"
     >
 
     <ImageView
@@ -22,5 +22,5 @@
         android:layout_marginTop="5dp"
         android:textSize="15sp"
         android:textAlignment="center"
-        />
+        android:textStyle="normal|bold" />
 </LinearLayout>

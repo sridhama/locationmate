@@ -17,59 +17,40 @@
         android:id="@+id/sri" />
 
     <Button
-        android:text="view friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:id="@+id/button"
-        android:layout_below="@+id/sri"
-        android:layout_centerHorizontal="true"
-        android:onClick="tempIntent"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/sri"
-        android:layout_toEndOf="@+id/sri"
         android:id="@+id/signup"
         android:onClick="tempIntent1"
-        android:text="signup" />
+        android:text="signup"
+        android:layout_marginTop="143dp"
+        android:layout_below="@+id/sri"
+        android:layout_toRightOf="@+id/button7"
+        android:layout_toEndOf="@+id/button7" />
 
     <Button
-        android:text="add friend"
+        android:text="Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/signup"
-        android:layout_toEndOf="@+id/signup"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginBottom="77dp"
-        android:id="@+id/button2"
-        android:onClick="addFriendIntent" />
-
-    <Button
-        android:text="home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button2"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:layout_marginRight="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="37dp"
-        android:id="@+id/button3"
-        android:onClick="homeIntent" />
+        android:layout_marginBottom="24dp"
+        android:id="@+id/button7"
+        android:onClick="viewfriends"
+        android:layout_alignBottom="@+id/signup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp" />
 
     <Button
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/signup"
-        android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button"
-        android:layout_marginBottom="35dp"
-        android:id="@+id/button7"
-        android:onClick="viewfriends" />
+        android:layout_below="@+id/button7"
+        android:layout_toRightOf="@+id/sri"
+        android:layout_toEndOf="@+id/sri"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:id="@+id/button2"
+        android:onClick="wifiStatus" />
+
 </RelativeLayout>

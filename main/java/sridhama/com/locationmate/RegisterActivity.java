@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
             String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 3);
 
 
-            final Intent intent = new Intent(getBaseContext(), ViewFriendsActivity.class);
+            final Intent intent = new Intent(getBaseContext(), MainActivity.class);
         EditText name = (EditText)findViewById(R.id.name_reg);
 //        EditText lname = (EditText)findViewById(R.id.lname);
             String gender = "";

@@ -7,5 +7,5 @@ $rs = mysqli_query($GLOBALS['connection'],$sql);
 if($rs){
   echo "SUCCESS";
 }else{
-  echo "ERROR, BSSID MAY EXIST";
+  echo "LOCATION ALREADY EXISTS.";
 }
