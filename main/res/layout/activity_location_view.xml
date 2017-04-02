@@ -16,10 +16,11 @@
         android:gravity="center"
         android:layout_gravity="center">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/avatar"
-            android:id="@+id/gender_img"/>
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/neutral"
+            android:id="@+id/gender_img"
+            />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

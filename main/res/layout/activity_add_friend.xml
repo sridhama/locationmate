@@ -17,14 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="25sp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/ypc"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/code"
-        android:textSize="36sp"
+        android:textSize="50sp"
         android:background="@drawable/code_border"
         android:clickable="false"
         android:padding="2dp"
@@ -33,29 +34,37 @@
         android:layout_below="@id/ypc"
         android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:text="This code changes every 100 seconds."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:id="@+id/notif_text"
+        android:layout_below="@id/code"
+        android:layout_marginTop="10dp"/>
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#000"
         android:id="@+id/hr"
-        android:layout_below="@id/code"
+        android:layout_below="@id/notif_text"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_below="@id/code">
+        android:layout_below="@id/hr">
     <TextView
         android:text="Enter Pairing Code:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:id="@+id/epc"
-        android:layout_below="@id/hr"
         android:layout_centerHorizontal="true"
         />
 
@@ -66,9 +75,11 @@
         android:id="@+id/friend_code"
         android:hint="e.g. ABC123"
         android:textStyle="normal|bold"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:layout_below="@id/epc"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:maxLength="6"
+        android:textAlignment="center" />
 
     <Button
         android:text="Pair"
@@ -77,7 +88,20 @@
         android:onClick="pair"
         android:gravity="center"
         android:layout_below="@id/friend_code"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/pair_button"/>
+        <TextView
+            android:text="Enter your friend's code above to pair."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/pair_button"
+            android:layout_centerHorizontal="true"
+            />
+
     </RelativeLayout>
 
 </RelativeLayout>

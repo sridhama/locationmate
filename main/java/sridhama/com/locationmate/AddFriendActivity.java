@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,6 +47,8 @@ public class AddFriendActivity extends AppCompatActivity {
         };
         t.start();
         // Ends here
+        EditText friend_code = (EditText) findViewById(R.id.friend_code);
+        friend_code.setFilters(new InputFilter[] {new InputFilter.AllCaps(), new InputFilter.LengthFilter(6)});
 
     }
 

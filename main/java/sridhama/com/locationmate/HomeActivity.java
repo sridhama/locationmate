@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
             for (int k = 0; k < genderdata.size(); k++) {
                 int val = genderdata.get(k);
                 if (val == 0) {
+//                    gridViewImageId[k] = R.drawable.male;
                     gridViewImageId[k] = R.drawable.male;
                 } else {
                     gridViewImageId[k] = R.drawable.female;
