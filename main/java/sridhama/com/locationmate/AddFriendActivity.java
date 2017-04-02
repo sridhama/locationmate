@@ -50,7 +50,19 @@ public class AddFriendActivity extends AppCompatActivity {
         EditText friend_code = (EditText) findViewById(R.id.friend_code);
         friend_code.setFilters(new InputFilter[] {new InputFilter.AllCaps(), new InputFilter.LengthFilter(6)});
 
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+
 
     public String generate_hash (String secret, String timestamp){
         int salt = Integer.parseInt(timestamp.substring(7, 8));
@@ -93,7 +105,11 @@ public class AddFriendActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                runIntent(v);
+                if(response.equals("SUCCESS")){
+                    runIntent(v);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Invalid Pairing Code", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

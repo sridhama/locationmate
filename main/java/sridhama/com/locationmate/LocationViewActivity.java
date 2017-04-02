@@ -63,37 +63,15 @@ public class LocationViewActivity extends AppCompatActivity {
 
 
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 
-
-//    public void get_data(final String friend_name, String friend_username){
-//        final View v;
-//        String url = "http://"+Constants.DOMAIN+"/LocationMate/data.php?username="+Constants.USERNAME+"&friend_username="+friend_username;
-//        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                TextView location = (TextView)findViewById(R.id.location);
-//                TextView last_seen = (TextView)findViewById(R.id.last_seen);
-//                TextView name_view = (TextView)findViewById(R.id.name);
-//                name_view.setText(friend_name);
-//                int start = response.indexOf("<br>");
-//                location.setText("Last Known Location: "+response.substring(0,start));
-//                last_seen.setText("Last Seen: "+response.substring(start+4));
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getApplicationContext(), "Network Error.", Toast.LENGTH_SHORT).show();
-//                runIntent(v);
-//            }
-//        });
-//        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
-//        // END VOLLEY
-//    }
-
-//    public void runIntent(View v){
-//        Intent i = new Intent(this, HomeActivity.class);
-//        startActivity(i);
-//    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
 
 }

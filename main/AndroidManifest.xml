@@ -18,20 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LocationViewActivity" />
-        <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home" />
-        <activity android:name=".AddFriendActivity" />
+        <activity android:name=".LocationViewActivity"
+            android:label="Friend Location"/>
+
+        <activity android:name=".AddFriendActivity"
+            android:label="@string/title_activity_add_friend"/>
 
         <service android:name=".LMService" />
 
-        <activity android:name=".BSSIDActivity" />
+        <activity android:name=".BSSIDActivity"
+            android:label="Add Location"/>
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".ViewFriendsActivity"
             android:label="@string/title_activity_view_friends"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
 </manifest>
