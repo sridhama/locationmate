@@ -20,9 +20,9 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/help"
+        android:id="@+id/logout"
         android:orderInCategory="100"
-        android:title="Help"
+        android:title="Logout"
         app:showAsAction="never" />
 
 

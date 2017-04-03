@@ -7,6 +7,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -17,12 +18,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
     }
 
     // Check if connected to wifi
@@ -38,9 +43,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             final Intent intent = new Intent(getBaseContext(), MainActivity.class);
         EditText name = (EditText)findViewById(R.id.name_reg);
+            EditText password = (EditText)findViewById(R.id.password_login);
 //        EditText lname = (EditText)findViewById(R.id.lname);
             String gender = "";
-        final EditText phone = (EditText)findViewById(R.id.phone_number);
+        final EditText phone = (EditText)findViewById(R.id.phone_number_login);
+
             RadioGroup rg = (RadioGroup) findViewById(R.id.genderRadio);
             int selectedId = rg.getCheckedRadioButtonId();
             if(selectedId == -1){
@@ -54,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 gender = "0";
             }
             // START VOLLEY
-        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?name="+name.getText().toString().replace(" ","%20")+"&phone="+phone.getText()+"&gender="+gender+"&bssid="+BSSID;
+        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?name="+name.getText().toString().replace(" ","%20")+"&phone="+phone.getText()+"&gender="+gender+"&bssid="+BSSID+"&password="+md5(password.getText().toString());
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -63,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("phone",phone.getText().toString());
                     editor.putString("secret_key",response.toString().substring(7));
-                    editor.putString("is_registered","1");
+                    editor.putString("is_logged_in","1");
                     editor.commit();
                     startActivity(intent);
                     finish();
@@ -84,6 +91,36 @@ public class RegisterActivity extends AppCompatActivity {
         });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
         // END VOLLEY
+    }
+
+    public void login(View v){
+        Intent i = new Intent(this,LoginActivity.class);
+        startActivity(i);
+    }
+
+    public static final String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

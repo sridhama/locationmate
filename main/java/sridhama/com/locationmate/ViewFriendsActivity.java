@@ -179,6 +179,17 @@ if(!wifiStatus()) {
             return true;
         }
 
+        if(id == R.id.logout){
+            SharedPreferences sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("is_logged_in","0");
+            editor.commit();
+            Intent logout_intent = new Intent(this, LoginActivity.class);
+            startActivity(logout_intent);
+            finish();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
