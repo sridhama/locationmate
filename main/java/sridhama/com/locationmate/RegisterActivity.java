@@ -28,6 +28,14 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        final String LOGIN_STATUS = userDetails.getString("is_logged_in", "");
+        if (LOGIN_STATUS.equals("1")) {
+            Intent intent1 = new Intent(this, ViewFriendsActivity.class);
+            startActivity(intent1);
+            finish();
+        }
+
     }
 
     // Check if connected to wifi

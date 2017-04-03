@@ -183,6 +183,8 @@ if(!wifiStatus()) {
             SharedPreferences sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("is_logged_in","0");
+            editor.remove("phone");
+            editor.remove("secret_key");
             editor.commit();
             Intent logout_intent = new Intent(this, LoginActivity.class);
             startActivity(logout_intent);
@@ -201,6 +203,12 @@ if(!wifiStatus()) {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        return;
     }
 
 }

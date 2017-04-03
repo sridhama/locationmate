@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         // check wifi status
         if(!wifiStatus()){
             Intent i= new Intent(this, NoWifiActivity.class);
@@ -47,10 +45,9 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
             final String LOGIN_STATUS = userDetails.getString("is_logged_in", "");
             if (LOGIN_STATUS.equals("1")) {
-
                 Intent intent1 = new Intent(this, ViewFriendsActivity.class);
                 startActivity(intent1);
-//            finish();
+                finish();
             } else {
                 Intent intent2 = new Intent(this, RegisterActivity.class);
                 startActivity(intent2);

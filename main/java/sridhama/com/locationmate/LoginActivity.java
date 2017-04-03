@@ -23,7 +23,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        final String LOGIN_STATUS = userDetails.getString("is_logged_in", "");
+        if (LOGIN_STATUS.equals("1")) {
+            Intent intent1 = new Intent(this, ViewFriendsActivity.class);
+            startActivity(intent1);
+            finish();
+        }
 
     }
 
@@ -77,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("secret_key",response.toString().substring(7));
                     editor.putString("is_logged_in","1");
                     editor.commit();
-                    System.out.println("SUCCESSFULL LOGIN - " + response);
                     startActivity(intent);
                     finish();
                 }else{

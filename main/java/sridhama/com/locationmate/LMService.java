@@ -29,8 +29,11 @@ public class LMService extends Service {
             @Override
             public void run() {
                 SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-                final String STORED_PHONE = userDetails.getString("phone", "");
-                update_bssid(STORED_PHONE);
+                String login_status = userDetails.getString("is_logged_in", "");
+                if(login_status.equals("1")) {
+                    final String STORED_PHONE = userDetails.getString("phone", "");
+                    update_bssid(STORED_PHONE);
+                }
             }
         }, 1000,60000);
         return Service.START_STICKY;
@@ -42,15 +45,11 @@ public class LMService extends Service {
         return null;
     }
 
-
     public String getBSSID() {
         WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifi_info = wm.getConnectionInfo();
-//        int RSSI = wifi_info.getRssi();
         String raw_BSSID = wifi_info.getBSSID();
         String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 1);
-//        int wifi_state = wm.getWifiState();
-//        int signal_level = wm.calculateSignalLevel(RSSI, 100) + 1;
         return BSSID;
     }
 
@@ -63,7 +62,6 @@ public class LMService extends Service {
         }
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_PHONE = userDetails.getString("phone", "");
-
         String url = "http://"+Constants.DOMAIN+"/LocationMate/update.php?phone="+STORED_PHONE+"&bssid="+bssid;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -73,14 +71,10 @@ public class LMService extends Service {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error Updating Location", Toast.LENGTH_SHORT).show();
             }
         });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
         // END VOLLEY
     }
-
-
-
 
 }
