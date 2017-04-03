@@ -62,7 +62,9 @@
         android:text="Call"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/call"
+        android:onClick="call" />
 
 
 </RelativeLayout>

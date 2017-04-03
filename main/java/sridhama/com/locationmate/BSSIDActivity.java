@@ -41,8 +41,8 @@ public class BSSIDActivity extends AppCompatActivity {
         WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifi_info = wm.getConnectionInfo();
         int RSSI = wifi_info.getRssi();
-        String raw_BSSID = wifi_info.getBSSID();
-        String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 3);
+        String BSSID = wifi_info.getBSSID();
+//        String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 1);
         int signal_level = wm.calculateSignalLevel(RSSI, 100) + 1;
         bssid.setText(BSSID);
         strength.setText(String.valueOf(signal_level));
@@ -54,8 +54,7 @@ public class BSSIDActivity extends AppCompatActivity {
         WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifi_info = wm.getConnectionInfo();
         String raw_BSSID = wifi_info.getBSSID();
-        String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 3);
-
+        String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 1);
         String url = "http://"+Constants.DOMAIN+"/LocationMate/upload.php?bssid="+BSSID+"&location="+val;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override

@@ -3,11 +3,13 @@ package sridhama.com.locationmate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +26,9 @@ public class LocationViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_view);
         final String friend_name = getIntent().getStringExtra("name");
-        String friend_username = getIntent().getStringExtra("friend_username");
+        String friend_phone = getIntent().getStringExtra("friend_phone");
         String gender_bool = getIntent().getStringExtra("friend_gender");
+
 
         ImageView iv = (ImageView)findViewById(R.id.gender_img);
         if(gender_bool.equals("0")) {
@@ -37,9 +40,9 @@ public class LocationViewActivity extends AppCompatActivity {
         final Intent i = new Intent(this, ViewFriendsActivity.class);
 
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-        final String STORED_USERNAME = userDetails.getString("username", "");
+        final String STORED_PHONE = userDetails.getString("phone", "");
 
-        String url = "http://"+Constants.DOMAIN+"/LocationMate/data.php?username="+STORED_USERNAME+"&friend_username="+friend_username;
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/data.php?phone="+STORED_PHONE+"&friend_phone="+friend_phone;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -72,6 +75,10 @@ public class LocationViewActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp(){
         finish();
         return true;
+    }
+
+    public void call(View v) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", getIntent().getStringExtra("friend_phone"), null)));
     }
 
 }

@@ -45,23 +45,23 @@
 
 
     <TextView
-        android:text="Username:"
+        android:text="Mobile Number:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name_reg"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
-        android:id="@+id/username_text" />
+        android:id="@+id/mobile_text" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:ems="10"
-        android:id="@+id/username"
-        android:hint="e.g. johndoe123"
-        android:layout_below="@+id/username_text"
+        android:id="@+id/phone_number"
+        android:hint="e.g. 9995555999"
+        android:layout_below="@+id/mobile_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -71,7 +71,7 @@
         android:text="Gender:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
+        android:layout_below="@+id/phone_number"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
@@ -121,6 +121,7 @@
         android:layout_below="@+id/genderRadio"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
 
 
 </RelativeLayout>

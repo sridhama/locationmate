@@ -1,14 +1,14 @@
 <?php
 require("./config.php");
 require("./cipher.php");
-function get_location($username, $friend_username){
+function get_location($phone, $friend_phone){
   // check friendship
-  $sql = "SELECT * FROM `friends_meta` WHERE `username` = '$username' AND `friend_username` = '$friend_username';";
+  $sql = "SELECT * FROM `friends_meta` WHERE `phone` = '$phone' AND `friend_phone` = '$friend_phone';";
   $res = mysqli_query($GLOBALS['connection'],$sql);
   $status = mysqli_num_rows($res);
   if($status == 1){
   // get location
-  $sql = "SELECT `location` FROM `bssid_location_meta` WHERE `bssid` = (SELECT `last_bssid` FROM `users` WHERE `username` = '$friend_username');";
+  $sql = "SELECT `location` FROM `bssid_location_meta` WHERE `bssid` = (SELECT `last_bssid` FROM `users` WHERE `phone` = '$friend_phone');";
   $rs = mysqli_query($GLOBALS['connection'], $sql);
   while($row = mysqli_fetch_assoc($rs)){
     $location = $row['location'];
@@ -22,14 +22,14 @@ function get_location($username, $friend_username){
   }
 }
 
-function get_time($username, $friend_username){
+function get_time($phone, $friend_phone){
   // check friendship
-  $sql = "SELECT * FROM `friends_meta` WHERE `username` = '$username' AND `friend_username` = '$friend_username';";
+  $sql = "SELECT * FROM `friends_meta` WHERE `phone` = '$phone' AND `friend_phone` = '$friend_phone';";
   $res = mysqli_query($GLOBALS['connection'],$sql);
   $status = mysqli_num_rows($res);
   if($status == 1){
   // get location
-  $sql = "SELECT `last_seen` FROM `users` WHERE `username` = '$friend_username';";
+  $sql = "SELECT `last_seen` FROM `users` WHERE `phone` = '$friend_phone';";
   $rs = mysqli_query($GLOBALS['connection'], $sql);
   while($row = mysqli_fetch_assoc($rs)){
     $time = $row['last_seen'];
@@ -68,7 +68,7 @@ function get_date($timestamp){
   }
 }
 
-function add_friend($username, $friend_code){
+function add_friend($phone, $friend_code){
   $friend_secret = decrypt($friend_code,$_SERVER['REQUEST_TIME']);
   $friend_find_sql = "SELECT * FROM `users` WHERE `secret_key` = '$friend_secret';";
   $rs1 = mysqli_query($GLOBALS['connection'],$friend_find_sql);
@@ -76,7 +76,7 @@ function add_friend($username, $friend_code){
     $num_res = mysqli_num_rows($rs1);
     if($num_res == 1){
       while($row = mysqli_fetch_assoc($rs1)){
-        $friend_username = $row['username'];
+        $friend_phone = $row['phone'];
       }
     }else{
       echo "ERROR";
@@ -86,8 +86,8 @@ function add_friend($username, $friend_code){
     echo "ERROR";
     return;
   }
-  if(are_friends($username,$friend_username)){
-  $sql = "INSERT INTO `friends_meta` (`username`,`friend_username`) VALUES ('$username', '$friend_username'), ('$friend_username', '$username');";
+  if(are_friends($phone,$friend_phone)){
+  $sql = "INSERT INTO `friends_meta` (`phone`,`friend_phone`) VALUES ('$phone', '$friend_phone'), ('$friend_phone', '$phone');";
   $rs = mysqli_query($GLOBALS['connection'], $sql);
   if($rs){
     echo "SUCCESS";
@@ -99,11 +99,11 @@ function add_friend($username, $friend_code){
   }
 }
 
-function are_friends($username, $friend_username){
-  if($username == $friend_username){
+function are_friends($phone, $friend_phone){
+  if($phone == $friend_phone){
     return false;
   }
-  $sql = "SELECT * FROM `friends_meta` WHERE `username` = '$username' AND `friend_username` = '$friend_username';";
+  $sql = "SELECT * FROM `friends_meta` WHERE `phone` = '$phone' AND `friend_phone` = '$friend_phone';";
   $rs = mysqli_query($GLOBALS['connection'], $sql);
   $num_rows = mysqli_num_rows($rs);
   if($num_rows == 0){

@@ -24,14 +24,13 @@ public class LMService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        System.out.println("STANDALONE SERVICE STARTED!!!!");
         Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-                final String STORED_USERNAME = userDetails.getString("username", "");
-                update_bssid(STORED_USERNAME);
+                final String STORED_PHONE = userDetails.getString("phone", "");
+                update_bssid(STORED_PHONE);
             }
         }, 1000,60000);
         return Service.START_STICKY;
@@ -49,13 +48,13 @@ public class LMService extends Service {
         WifiInfo wifi_info = wm.getConnectionInfo();
 //        int RSSI = wifi_info.getRssi();
         String raw_BSSID = wifi_info.getBSSID();
-        String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 3);
+        String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 1);
 //        int wifi_state = wm.getWifiState();
 //        int signal_level = wm.calculateSignalLevel(RSSI, 100) + 1;
         return BSSID;
     }
 
-    public void update_bssid(String username){
+    public void update_bssid(String phone){
         String bssid;
         try {
             bssid = getBSSID();
@@ -63,9 +62,9 @@ public class LMService extends Service {
             return;
         }
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-        final String STORED_USERNAME = userDetails.getString("username", "");
+        final String STORED_PHONE = userDetails.getString("phone", "");
 
-        String url = "http://"+Constants.DOMAIN+"/LocationMate/update.php?username="+STORED_USERNAME+"&bssid="+bssid;
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/update.php?phone="+STORED_PHONE+"&bssid="+bssid;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -74,7 +73,7 @@ public class LMService extends Service {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error Updating Location.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error Updating Location", Toast.LENGTH_SHORT).show();
             }
         });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);

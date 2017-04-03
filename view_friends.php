@@ -1,7 +1,7 @@
 <?php
 require("./config.php");
-$username = $_GET['username'];
-  $sql = "SELECT a.name, a.username, a.gender FROM users a, friends_meta b WHERE a.username = b.friend_username AND b.username = '$username';";
+$phone = $_GET['phone'];
+  $sql = "SELECT a.name, a.phone, a.gender FROM users a, friends_meta b WHERE a.phone = b.friend_phone AND b.phone = '$phone';";
 $body = "";
 $rs = mysqli_query($GLOBALS['connection'],$sql);
 if(mysqli_num_rows($rs) == 0){
@@ -9,17 +9,17 @@ if(mysqli_num_rows($rs) == 0){
   return;
 }
 $names = array();
-$usernames = array();
+$phones = array();
 $genders = array();
 while($row = mysqli_fetch_assoc($rs)){
-  $friend_username = $row['username'];
+  $friend_phone = $row['phone'];
   $name = $row['name'];
   $gender = $row['gender'];
-  // $body .= "NAME:".$fname." ".$lname."<br>USERNAME:".$friend_username."<br>GENDER:".$gender."<br>";
-  // $body .= $fname."\n".$lname."\n".$friend_username."\n".$gender."\n";
+  // $body .= "NAME:".$fname." ".$lname."<br>phone:".$friend_phone."<br>GENDER:".$gender."<br>";
+  // $body .= $fname."\n".$lname."\n".$friend_phone."\n".$gender."\n";
   array_push($names,$name);
-  array_push($usernames,$friend_username);
+  array_push($phones,$friend_phone);
   array_push($genders,$gender);
 }
-$res = array('names' => $names, 'usernames' => $usernames, 'genders'=>$genders);
+$res = array('names' => $names, 'phones' => $phones, 'genders'=>$genders);
 echo json_encode($res);

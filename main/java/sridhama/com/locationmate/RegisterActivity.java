@@ -32,14 +32,15 @@ public class RegisterActivity extends AppCompatActivity {
             WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifi_info = wm.getConnectionInfo();
             String raw_BSSID = wifi_info.getBSSID();
-            String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 3);
+            String BSSID = raw_BSSID.substring(0, raw_BSSID.length() - 1);
+
 
 
             final Intent intent = new Intent(getBaseContext(), MainActivity.class);
         EditText name = (EditText)findViewById(R.id.name_reg);
 //        EditText lname = (EditText)findViewById(R.id.lname);
             String gender = "";
-        final EditText username = (EditText)findViewById(R.id.username);
+        final EditText phone = (EditText)findViewById(R.id.phone_number);
             RadioGroup rg = (RadioGroup) findViewById(R.id.genderRadio);
             int selectedId = rg.getCheckedRadioButtonId();
             if(selectedId == -1){
@@ -53,21 +54,19 @@ public class RegisterActivity extends AppCompatActivity {
                 gender = "0";
             }
             // START VOLLEY
-        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?name="+name.getText().toString().replace(" ","%20")+"&username="+username.getText()+"&gender="+gender+"&bssid="+BSSID;
+        String url = "http://"+ Constants.DOMAIN+"/LocationMate/add_user.php?name="+name.getText().toString().replace(" ","%20")+"&phone="+phone.getText()+"&gender="+gender+"&bssid="+BSSID;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().substring(0,7).equals("SUCCESS")){
                     SharedPreferences sharedPref = getSharedPreferences("user_data",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("username",username.getText().toString());
+                    editor.putString("phone",phone.getText().toString());
                     editor.putString("secret_key",response.toString().substring(7));
                     editor.putString("is_registered","1");
                     editor.commit();
                     startActivity(intent);
                     finish();
-                }else if(response.toString().equals("USERNAME_EXISTS")){
-                    Toast.makeText(getApplicationContext(), "Username already exists.", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                 }

@@ -60,10 +60,10 @@ if(!wifiStatus()) {
 
         // START OLD CODE
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-        final String STORED_USERNAME = userDetails.getString("username", "");
+        final String STORED_PHONE = userDetails.getString("phone", "");
         final TextView tv = (TextView) findViewById(R.id.message);
 
-        String url = "http://" + Constants.DOMAIN + "/LocationMate/view_friends.php?username=" + STORED_USERNAME;
+        String url = "http://" + Constants.DOMAIN + "/LocationMate/view_friends.php?phone=" + STORED_PHONE;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -84,14 +84,14 @@ if(!wifiStatus()) {
                         }
                     }
                     final String[] gridViewString = listdata.toArray(new String[0]);
-                    JSONArray jArray1 = jObject.getJSONArray("usernames");
-                    ArrayList<String> usernamedata = new ArrayList<String>();
+                    JSONArray jArray1 = jObject.getJSONArray("phones");
+                    ArrayList<String> phonedata = new ArrayList<String>();
                     if (jArray1 != null) {
                         for (int k = 0; k < jArray1.length(); k++) {
-                            usernamedata.add(jArray1.getString(k));
+                            phonedata.add(jArray1.getString(k));
                         }
                     }
-                    final String[] usernameString = usernamedata.toArray(new String[0]);
+                    final String[] phoneString = phonedata.toArray(new String[0]);
 
 
                     JSONArray jArray2 = jObject.getJSONArray("genders");
@@ -123,7 +123,7 @@ if(!wifiStatus()) {
                         public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                             Intent intent = new Intent(getBaseContext(), LocationViewActivity.class);
                             intent.putExtra("name", gridViewString[+i]);
-                            intent.putExtra("friend_username", usernameString[+i]);
+                            intent.putExtra("friend_phone", phoneString[+i]);
                             intent.putExtra("friend_gender", String.valueOf(genderdata.get(+i)));
                             startActivity(intent);
                         }

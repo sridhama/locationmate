@@ -99,9 +99,9 @@ public class AddFriendActivity extends AppCompatActivity {
         String friend_codeText = friend_code.getText().toString();
 
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-        final String STORED_USERNAME = userDetails.getString("username", "");
+        final String STORED_PHONE = userDetails.getString("phone", "");
 
-        String url = "http://"+Constants.DOMAIN+"/LocationMate/add_friend.php?username="+STORED_USERNAME+"&friend_code="+friend_codeText;
+        String url = "http://"+Constants.DOMAIN+"/LocationMate/add_friend.php?phone="+STORED_PHONE+"&friend_code="+friend_codeText;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

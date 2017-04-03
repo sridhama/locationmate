@@ -1,11 +1,11 @@
 <?php
 require("./functions.php");
-if(isset($_GET['username']) && isset($_GET['friend_username'])){
-$username = $_GET['username'];
-$friend_username = $_GET['friend_username'];
-echo get_location($username,$friend_username);
+if(isset($_GET['phone']) && isset($_GET['friend_phone'])){
+$phone = $_GET['phone'];
+$friend_phone = $_GET['friend_phone'];
+echo get_location($phone,$friend_phone);
 echo "<br>";
-echo get_date(get_time($username,$friend_username));
+echo get_date(get_time($phone,$friend_phone));
 }else{
   echo "ERROR";
 }
