@@ -38,7 +38,7 @@
         android:ems="10"
         android:layout_marginBottom="22dp"
         android:id="@+id/location"
-        android:hint="e.g. Apartment B21"
+        android:hint="e.g. Apartment B11"
         android:layout_above="@+id/button5"
         android:layout_centerHorizontal="true" />
 

@@ -59,7 +59,7 @@ function get_date($timestamp){
   }else{
     $minutes_since = minutes_since($timestamp);
     if($minutes_since > 0 && $minutes_since < 59){
-    return "Last seen today at ".date("g:i a", $timestamp)." ($minutes_since minutes ago)";
+    return "Last seen today at ".strtoupper(date("g:i a", $timestamp))." ($minutes_since minutes ago)";
   }else if($minutes_since == 0){
     return "Last seen just now";
   }else{

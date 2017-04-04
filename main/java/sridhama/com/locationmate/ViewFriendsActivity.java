@@ -77,6 +77,7 @@ if(!wifiStatus()) {
                 // parsing JSON
                 try {
                     tv.setVisibility(View.GONE);
+
                     JSONObject jObject = new JSONObject(result);
                     JSONArray jArray = jObject.getJSONArray("names");
                     ArrayList<String> listdata = new ArrayList<String>();
@@ -85,6 +86,7 @@ if(!wifiStatus()) {
                             listdata.add(jArray.getString(k));
                         }
                     }
+                    friend_text.setText("Friends ("+listdata.size()+")");
                     final String[] gridViewString = listdata.toArray(new String[0]);
                     JSONArray jArray1 = jObject.getJSONArray("phones");
                     ArrayList<String> phonedata = new ArrayList<String>();

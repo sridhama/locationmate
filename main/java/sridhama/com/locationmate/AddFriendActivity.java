@@ -24,6 +24,7 @@ public class AddFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
         final TextView code = (TextView) findViewById(R.id.code);
+        final TextView notif_text = (TextView) findViewById(R.id.notif_text);
         // Update Code
         Thread t = new Thread() {
 
@@ -36,7 +37,7 @@ public class AddFriendActivity extends AppCompatActivity {
                             public void run() {
                                 SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
                                 final String STORED_SECRET_KEY = userDetails.getString("secret_key", "");
-                                update_hash(STORED_SECRET_KEY,code);
+                                update_hash(STORED_SECRET_KEY,code,notif_text);
                             }
                         });
                         Thread.sleep(1000);
@@ -88,8 +89,10 @@ public class AddFriendActivity extends AppCompatActivity {
         }
         return String.valueOf(hash);
     }
-    public void update_hash(String secret,TextView code) {
+    public void update_hash(String secret,TextView code, TextView notif_text) {
         Long tsLong = System.currentTimeMillis()/1000;
+        Long time_rem = 100 - tsLong%100;
+        notif_text.setText("This is your unique pairing code. This code will change in "+time_rem.toString()+" seconds.");
         String ts = tsLong.toString();
         code.setText(generate_hash(secret, ts));
     }

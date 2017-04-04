@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,23 +22,30 @@
         </activity>
         <activity
             android:name=".LocationViewActivity"
-            android:label="View Location" />
+            android:label="View Location"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AddFriendActivity"
-            android:label="@string/title_activity_add_friend" />
+            android:label="@string/title_activity_add_friend"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".LMService" />
 
         <activity
             android:name=".BSSIDActivity"
-            android:label="Add Location" />
-        <activity android:name=".RegisterActivity" />
+            android:label="Add Location"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ViewFriendsActivity"
             android:label="@string/title_activity_view_friends"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NoWifiActivity" />
-        <activity android:name=".LoginActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NoWifiActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

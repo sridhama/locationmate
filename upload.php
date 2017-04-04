@@ -1,6 +1,6 @@
 <?php
 require("./config.php");
-$location = $_GET['location'];
+$location = mysqli_real_escape_string($GLOBALS['connection'],$_GET['location']);
 $bssid = $_GET['bssid'];
 $sql = "INSERT INTO `bssid_location_meta` (`bssid`, `location`) VALUES ('$bssid','$location');";
 $rs = mysqli_query($GLOBALS['connection'],$sql);
