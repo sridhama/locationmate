@@ -36,21 +36,36 @@
         android:textStyle="normal|bold"
         android:textAllCaps="false" />
 
+        <TextView
+            android:text="Last Known Location:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:id="@+id/location_text"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
     <TextView
-        android:text="Determining..."
+        android:text="Determining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="1dp"
         android:id="@+id/location"
-        />
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:id="@+id/last_seen"/>
+        android:layout_marginTop="20dp"
+        android:id="@+id/last_seen"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:textStyle="normal|italic" />
 
 
 

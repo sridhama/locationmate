@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // SERVICE START
+        Intent service_LM = new Intent(this, LMService.class);
+        startService(service_LM);
+        // SERVICE END
 
         // check wifi status
         if(!wifiStatus()){
@@ -38,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }else {
-            // SERVICE START
-            Intent service_LM = new Intent(this, LMService.class);
-            startService(service_LM);
-            // SERVICE END
             SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
             final String LOGIN_STATUS = userDetails.getString("is_logged_in", "");
             if (LOGIN_STATUS.equals("1")) {
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+        finish();
 
     }
 

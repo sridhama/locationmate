@@ -62,6 +62,7 @@ if(!wifiStatus()) {
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_PHONE = userDetails.getString("phone", "");
         final TextView tv = (TextView) findViewById(R.id.message);
+        final TextView friend_text = (TextView) findViewById(R.id.friend_text);
 
         String url = "http://" + Constants.DOMAIN + "/LocationMate/view_friends.php?phone=" + STORED_PHONE;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -70,6 +71,7 @@ if(!wifiStatus()) {
                 String result = response.toString();
                 if (result.equals("NO_FRIENDS")) {
                     tv.setText("Add friends to get started!");
+                    friend_text.setVisibility(View.GONE);
                     return;
                 }
                 // parsing JSON
@@ -207,7 +209,6 @@ if(!wifiStatus()) {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         return;
     }
 

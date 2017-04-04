@@ -7,5 +7,10 @@ $rs = mysqli_query($GLOBALS['connection'],$sql);
 if($rs){
   echo "SUCCESS";
 }else{
-  echo "LOCATION ALREADY EXISTS.";
+  $sql = "SELECT * FROM `bssid_location_meta` WHERE `bssid` = '$bssid';";
+  $rs1 = mysqli_query($GLOBALS['connection'],$sql);
+  while($row=mysqli_fetch_assoc($rs1)){
+    $location = $row['location'];
+  }
+  echo "ERROR: LOCATION ALREADY MAPPED AS:\n".$location;
 }

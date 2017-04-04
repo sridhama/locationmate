@@ -51,7 +51,7 @@ public class LocationViewActivity extends AppCompatActivity {
                 TextView name_view = (TextView)findViewById(R.id.name);
                 name_view.setText(friend_name);
                 int start = response.indexOf("<br>");
-                location.setText("Last Known Location: "+response.substring(0,start));
+                location.setText(response.substring(0,start));
                 last_seen.setText(response.substring(start+4));
             }
         }, new Response.ErrorListener() {
