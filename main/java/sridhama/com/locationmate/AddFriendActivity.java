@@ -133,6 +133,13 @@ public class AddFriendActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, ViewFriendsActivity.class);
+        startActivity(i);
+        return;
+    }
+
 }
 
 

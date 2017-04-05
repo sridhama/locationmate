@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -22,6 +23,8 @@ import java.util.TimerTask;
 
 public class LMService extends Service {
 
+    int hidden = 0;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Timer t = new Timer();
@@ -30,9 +33,13 @@ public class LMService extends Service {
             public void run() {
                 SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
                 String login_status = userDetails.getString("is_logged_in", "");
-                if(login_status.equals("1")) {
-                    final String STORED_PHONE = userDetails.getString("phone", "");
+                SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                boolean hidebool = SP.getBoolean("hide_location",false);
+                final String STORED_PHONE = userDetails.getString("phone", "");
+                if(login_status.equals("1") && hidebool == false) {
                     update_bssid(STORED_PHONE);
+                }else{
+                    hide_bssid(STORED_PHONE);
                 }
             }
         }, 1000,60000);
@@ -66,7 +73,9 @@ public class LMService extends Service {
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                if(hidden != 0){
+                    hidden = 0;
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -75,6 +84,26 @@ public class LMService extends Service {
         });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
         // END VOLLEY
+    }
+
+    public void hide_bssid(String phone){
+        if(hidden == 0) {
+            SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+            final String STORED_PHONE = userDetails.getString("phone", "");
+            String url = "http://" + Constants.DOMAIN + "/LocationMate/update.php?phone=" + STORED_PHONE + "&bssid=HIDDEN";
+            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    hidden = 1;
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+            // END VOLLEY
+        }
     }
 
 }

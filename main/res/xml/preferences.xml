@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Privacy">
+        <SwitchPreference
+        android:defaultValue="false"
+        android:title="Hide Current Location"
+        android:summary="Enabling this option prevents you from viewing your friends' location."
+        android:key="hide_location" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Account">
+
+        </PreferenceCategory>
+</PreferenceScreen>

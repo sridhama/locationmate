@@ -127,5 +127,10 @@ public class RegisterActivity extends AppCompatActivity {
         return "";
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
 
 }

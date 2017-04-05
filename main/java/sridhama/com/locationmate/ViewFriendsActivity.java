@@ -1,13 +1,19 @@
 package sridhama.com.locationmate;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -63,6 +69,13 @@ if(!wifiStatus()) {
         final String STORED_PHONE = userDetails.getString("phone", "");
         final TextView tv = (TextView) findViewById(R.id.message);
         final TextView friend_text = (TextView) findViewById(R.id.friend_text);
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean hidebool = SP.getBoolean("hide_location",false);
+        if(hidebool == true){
+            tv.setText("Enable Location to View Friends");
+            friend_text.setVisibility(View.GONE);
+            return;
+        }
 
         String url = "http://" + Constants.DOMAIN + "/LocationMate/view_friends.php?phone=" + STORED_PHONE;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -131,7 +144,58 @@ if(!wifiStatus()) {
                             intent.putExtra("friend_gender", String.valueOf(genderdata.get(+i)));
                             startActivity(intent);
                         }
-                    });
+                    }
+                    );
+
+                    androidGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> parent, View view, final int i, long id) {
+//                            Intent intent = new Intent(getBaseContext(), LocationViewActivity.class);
+//                            intent.putExtra("name", gridViewString[+i]);
+//                            intent.putExtra("friend_phone", phoneString[+i]);
+//                            intent.putExtra("friend_gender", String.valueOf(genderdata.get(+i)));
+//                            startActivity(intent);
+                            AlertDialog.Builder a_builder = new AlertDialog.Builder(ViewFriendsActivity.this);
+                            a_builder.setCancelable(false).setPositiveButton("Unfriend",new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            String url = "http://"+Constants.DOMAIN+"/LocationMate/unfriend.php?phone="+STORED_PHONE+"&friend_phone="+phoneString[+i];
+                                            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                        Toast.makeText(getApplicationContext(), "Friend Removed", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = getIntent();
+                                                        finish();
+                                                        startActivity(intent);
+                                                }
+                                            }, new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    Toast.makeText(getApplicationContext(), "Error Removing Friend.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                            MySingleton.getInstance(ViewFriendsActivity.this).addToRequestQueue(stringRequest);
+                                            // END VOLLEY
+
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    }) ;
+                            AlertDialog alert = a_builder.create();
+                            alert.setTitle("Unfriend "+gridViewString[+i]);
+                            alert.show();
+
+                            return true;
+                        }
+                    }
+                    );
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -140,7 +204,7 @@ if(!wifiStatus()) {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Network Error.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
             }
         });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
@@ -150,6 +214,7 @@ if(!wifiStatus()) {
 
 
 }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,6 +232,8 @@ if(!wifiStatus()) {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, PreferenceActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -195,6 +262,15 @@ if(!wifiStatus()) {
             finish();
             return true;
         }
+
+        if(id == R.id.help){
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                    "mailto","locationmate@sridhama.com", null));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "LocationMate Help");
+            intent.putExtra(Intent.EXTRA_TEXT, "Name: \n\nPhone: \n\nIssue: ");
+            startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

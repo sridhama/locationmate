@@ -50,9 +50,13 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ToSActivity"
-            android:screenOrientation="portrait"
-            android:label="LocationMate"></activity>
+        <activity
+            android:name=".ToSActivity"
+            android:label="LocationMate"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PreferenceActivity"
+            android:label="Settings"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

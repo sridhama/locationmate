@@ -110,7 +110,7 @@
         android:layout_marginTop="7dp"
         android:id="@+id/pair_button"/>
         <TextView
-            android:text="To pair, enter your friend's code."
+            android:text="To pair, enter your friend's code. Refresh the Home Screen after pairing."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
