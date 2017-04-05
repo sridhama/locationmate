@@ -41,6 +41,7 @@ import java.util.ArrayList;
 public class ViewFriendsActivity extends AppCompatActivity {
     GridView androidGridView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +66,8 @@ if(!wifiStatus()) {
 
 
         // START OLD CODE
-        SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
-        final String STORED_PHONE = userDetails.getString("phone", "");
+    SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+    final String STORED_PHONE = userDetails.getString("phone", "");
         final TextView tv = (TextView) findViewById(R.id.message);
         final TextView friend_text = (TextView) findViewById(R.id.friend_text);
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -267,8 +268,9 @@ if(!wifiStatus()) {
             Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                     "mailto","locationmate@sridhama.com", null));
             intent.putExtra(Intent.EXTRA_SUBJECT, "LocationMate Help");
-            intent.putExtra(Intent.EXTRA_TEXT, "Name: \n\nPhone: \n\nIssue: ");
-            startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+            intent.putExtra(Intent.EXTRA_TEXT, "Name: \n\nPhone: \n\nIssue:  ");
+            startActivity(intent);
+            return true;
         }
 
 
