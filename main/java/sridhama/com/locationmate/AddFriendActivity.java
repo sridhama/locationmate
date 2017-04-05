@@ -92,7 +92,11 @@ public class AddFriendActivity extends AppCompatActivity {
     public void update_hash(String secret,TextView code, TextView notif_text) {
         Long tsLong = System.currentTimeMillis()/1000;
         Long time_rem = 100 - tsLong%100;
-        notif_text.setText("This is your unique pairing code. This code will change in "+time_rem.toString()+" seconds.");
+        if(time_rem == 1){
+            notif_text.setText("This is your unique pairing code. This code will update in " + time_rem.toString() + " second.");
+        }else {
+            notif_text.setText("This is your unique pairing code. This code will update in " + time_rem.toString() + " seconds.");
+        }
         String ts = tsLong.toString();
         code.setText(generate_hash(secret, ts));
     }

@@ -86,10 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                 }
 
-
-
-
-
             }
         }, new Response.ErrorListener() {
             @Override
