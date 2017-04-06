@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +31,7 @@ public class ViewLocationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_locations);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String STORED_PHONE = userDetails.getString("phone", "");
         String url = "http://" + Constants.DOMAIN + "/LocationMate/view_locations.php?phone=" + STORED_PHONE;
@@ -90,7 +91,18 @@ public class ViewLocationsActivity extends AppCompatActivity {
         });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -39,7 +39,7 @@ public class ViewFriendsatLocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friendsat_location);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         if(!wifiStatus()) {
@@ -190,6 +190,19 @@ public class ViewFriendsatLocationActivity extends AppCompatActivity {
             // END OLD CODE
 
         }
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public boolean wifiStatus(){

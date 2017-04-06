@@ -26,7 +26,7 @@ public class PreferenceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment {
@@ -44,6 +44,17 @@ public class PreferenceActivity extends AppCompatActivity {
         Intent i = new Intent(this, ViewFriendsActivity.class);
         startActivity(i);
         return;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
