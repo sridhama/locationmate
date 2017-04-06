@@ -9,6 +9,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="sridhama.com.locationmate.RegisterActivity">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -158,15 +161,14 @@
         android:textColor="@color/colorPrimaryDark" />
 
     <TextView
-        android:text="By signing up, you agree to the Terms of Service. Authorised friends will be able to view your approximate location."
+        android:text="By signing up you agree to our Terms of Service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
         android:layout_marginTop="12dp"
-        android:textAlignment="viewStart"
         android:layout_below="@+id/genderRadio"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -12,7 +12,7 @@ if($rs){
   echo "YES";
 }
 }
-echo "<pre style=font-family:Times New Roman>".base64_decode("MTIzDQpuZXdsaW5lDQogICAzc3BhY2U=")."</pre>";
+echo base64_decode("MTIzDQpuZXdsaW5lDQogICAzc3BhY2U=");
 ?>
 
 <html>

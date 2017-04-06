@@ -6,7 +6,8 @@
         android:id="@+id/refresh"
         android:orderInCategory="103"
         android:title="Refresh"
-        app:showAsAction="never" />
+        app:showAsAction="always"
+        android:icon="@drawable/ic_sync"/>
 
 
 

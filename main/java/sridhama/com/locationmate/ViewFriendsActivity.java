@@ -240,8 +240,9 @@ if(!wifiStatus()) {
 
         if (id == R.id.refresh) {
             Intent intent = getIntent();
-            finish();
             startActivity(intent);
+            finish();
+            Toast.makeText(getApplicationContext(), "Synced", Toast.LENGTH_SHORT).show();
             return true;
         }
 
