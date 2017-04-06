@@ -47,6 +47,7 @@ public class ViewFriendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friends);
 
+
 if(!wifiStatus()) {
     Intent i= new Intent(this, NoWifiActivity.class);
     startActivity(i);
@@ -205,7 +206,7 @@ if(!wifiStatus()) {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "LocationMate Server Down", Toast.LENGTH_SHORT).show();
             }
         });
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
@@ -243,6 +244,11 @@ if(!wifiStatus()) {
             startActivity(intent);
             finish();
             Toast.makeText(getApplicationContext(), "Synced", Toast.LENGTH_SHORT).show();
+            // SERVICE refresh
+            Intent service_LM = new Intent(this, LMService.class);
+            stopService(service_LM);
+            startService(service_LM);
+            // SERVICE refresh end
             return true;
         }
 
@@ -274,8 +280,20 @@ if(!wifiStatus()) {
             return true;
         }
 
+        if(id == R.id.locationview){
+            Intent i = new Intent(this, ViewLocationsActivity.class);
+            startActivity(i);
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "Press Home to Exit", Toast.LENGTH_SHORT).show();
+        return;
     }
 
     public boolean wifiStatus(){
@@ -286,11 +304,6 @@ if(!wifiStatus()) {
         }else{
             return false;
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        return;
     }
 
 }

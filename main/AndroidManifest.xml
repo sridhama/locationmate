@@ -54,8 +54,16 @@
             android:name=".ToSActivity"
             android:label="LocationMate"
             android:screenOrientation="portrait" />
-        <activity android:name=".PreferenceActivity"
+        <activity
+            android:name=".PreferenceActivity"
             android:label="Settings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewLocationsActivity"
+            android:label="Friends by Location"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ViewFriendsatLocationActivity"
+            android:label="Friends at Location"
             android:screenOrientation="portrait"></activity>
     </application>
 

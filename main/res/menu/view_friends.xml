@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/locationview"
+        android:orderInCategory="103"
+        android:title="Friends by Location"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_pin_drop_"/>
+
+    <item
         android:id="@+id/refresh"
         android:orderInCategory="103"
         android:title="Refresh"
         app:showAsAction="always"
         android:icon="@drawable/ic_sync"/>
+
 
 
 

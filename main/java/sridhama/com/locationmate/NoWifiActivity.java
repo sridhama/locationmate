@@ -22,7 +22,7 @@ public class NoWifiActivity extends AppCompatActivity {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }else{
-            Toast.makeText(getApplicationContext(), "Network Error.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "LocationMate Server Down", Toast.LENGTH_SHORT).show();
         }
     }
 
