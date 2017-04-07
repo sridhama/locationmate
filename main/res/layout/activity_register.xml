@@ -48,7 +48,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:maxLength="32"
+        android:maxLength="16"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "/>
 
 
@@ -145,7 +145,7 @@
         android:text="Sign Up"
         android:onClick="signupfunc"
         android:layout_below="@+id/textView2"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="15dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -155,19 +155,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView4"
         android:layout_below="@+id/button6"
+        android:textSize="16dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:onClick="login"
         android:textColor="@color/colorPrimaryDark" />
 
     <TextView
-        android:text="By signing up you agree to our Terms of Service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
         android:layout_marginTop="12dp"
         android:layout_below="@+id/genderRadio"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="tos_link"
+        android:textColor="@color/colorPrimaryDark"/>
 </RelativeLayout>
     </ScrollView>
 

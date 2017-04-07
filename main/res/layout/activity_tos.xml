@@ -20,15 +20,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:textStyle="normal|bold" />
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sv"
+        android:layout_below="@id/textView5">
     <TextView
-        android:text="LocationMate displays the approximate location of your friend based on their nearest WiFi Router."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:textSize="14sp"
-        android:layout_below="@+id/textView5"
+        android:id="@+id/tos"
+        android:textSize="18sp"
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textAlignment="viewStart" />
+    </ScrollView>
 </RelativeLayout>

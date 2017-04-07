@@ -7,12 +7,14 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -28,6 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        String s = "By signing up you agree to our <u>Terms of Service</u>";
+        ((TextView)findViewById(R.id.textView2)).setText(Html.fromHtml(s));
 
         SharedPreferences userDetails = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         final String LOGIN_STATUS = userDetails.getString("is_logged_in", "");
@@ -133,7 +138,10 @@ public class RegisterActivity extends AppCompatActivity {
         return;
     }
 
-
+    public void tos_link(View v){
+        Intent i = new Intent(this, ToSActivity.class);
+        startActivity(i);
+    }
 
 
 }

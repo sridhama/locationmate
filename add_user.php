@@ -1,7 +1,6 @@
 <?php
 require("./config.php");
-$name = ucwords(mysqli_real_escape_string($GLOBALS['connection'],$_GET['name']));
-// $lname = ucfirst(mysqli_real_escape_string($GLOBALS['connection'],$_GET['lname']));
+$name = ucwords(trim(mysqli_real_escape_string($GLOBALS['connection'],$_GET['name'])));
 $gender = intval($_GET['gender']);
 $bssid = $_GET['bssid'];
 $phone = (mysqli_real_escape_string($GLOBALS['connection'],$_GET['phone']));

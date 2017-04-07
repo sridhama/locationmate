@@ -13,8 +13,6 @@
     android:weightSum="1.0"
     android:orientation="vertical"
     >
-
-
     <RelativeLayout android:layout_height="0dp"
         android:layout_weight="0.5"
         android:layout_width="match_parent">
@@ -46,16 +44,13 @@
         android:layout_marginTop="30dp"/>
 
     <TextView
-
-
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="15sp"
         android:id="@+id/notif_text"
         android:layout_below="@id/code"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"/>
         </RelativeLayout>
     </RelativeLayout>
 

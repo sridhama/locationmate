@@ -27,6 +27,8 @@ public class PreferenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment {
@@ -34,8 +36,8 @@ public class PreferenceActivity extends AppCompatActivity {
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
-
         }
+
 
     }
 
