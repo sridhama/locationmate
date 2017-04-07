@@ -40,11 +40,26 @@ function get_time($phone, $friend_phone){
   }
 }
 
-function days_since($date){
-  $daysleft = $_SERVER['REQUEST_TIME'] - $date;
-  $days = floor($daysleft/86400);
-  return $days;
+// function days_since($date){
+//   // $daysleft = $_SERVER['REQUEST_TIME'] - $date;
+//   $date = $_SERVER['REQUEST_TIME'];
+  // echo date("d");
+//   $days = floor($daysleft/86400);
+//   return $days;
+// }
+
+function days_since($timestamp){
+  $given_day = date("d", $timestamp);
+  $today = date("d");
+  if($today == $given_day) return "today";
+  $days_since = floor(($_SERVER['REQUEST_TIME']-$timestamp)/86400);
+  if($days_since == 0){
+    return "yesterday";
+  }else{
+    return $days_since + 1;
+  }
 }
+
 
 function minutes_since($timestamp){
   return floor(($_SERVER['REQUEST_TIME'] - $timestamp)/60);
@@ -52,21 +67,31 @@ function minutes_since($timestamp){
 
 function get_date($timestamp){
   $days_since = days_since($timestamp);
-  if($days_since != 0){
-    return "Last seen ".$days_since." days ago at ".date("g:i a", $timestamp);
-  }else if($days_since == 1){
-      return "Last seen yesterday at ".date("g:i a", $timestamp);
-  }else{
-    $minutes_since = minutes_since($timestamp);
-    if($minutes_since > 0 && $minutes_since < 59){
-    return "Last seen today at ".strtoupper(date("g:i a", $timestamp))." ($minutes_since minutes ago)";
-  }else if($minutes_since == 0){
-    return "Last seen just now";
-  }else{
-    return "Last seen today at ".date("g:i a", $timestamp);
-  }
+  switch($days_since){
+    case "today":
+      $minutes_since = minutes_since($timestamp);
+      if($minutes_since == 0){
+            return "Last seen just now";
+      }else if($minutes_since == 1){
+        return "Last seen today at ".strtoupper(date("g:i a", $timestamp))." (1 minute ago)";
+      }else if($minutes_since > 0 && $minutes_since < 59){
+        return "Last seen today at ".strtoupper(date("g:i a", $timestamp))." ($minutes_since minutes ago)";
+      }else{
+            return "Last seen today at ".strtoupper(date("g:i a", $timestamp));
+      }
+      break;
+    case "yesterday":
+      return "Last seen yesterday at ".strtoupper(date("g:i a", $timestamp));
+      break;
+    case "yesterday":
+      return "Last seen yesterday at ".strtoupper(date("g:i a", $timestamp));
+      break;
+    default:
+      return "Last seen $days_since days ago at ".strtoupper(date("g:i a", $timestamp));
   }
 }
+
+
 
 function add_friend($phone, $friend_code){
   $friend_secret = decrypt($friend_code,$_SERVER['REQUEST_TIME']);

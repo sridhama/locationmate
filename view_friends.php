@@ -1,7 +1,7 @@
 <?php
 require("./config.php");
 $phone = $_GET['phone'];
-  $sql = "SELECT a.name, a.phone, a.gender FROM users a, friends_meta b WHERE a.phone = b.friend_phone AND b.phone = '$phone';";
+  $sql = "SELECT a.name, a.phone, a.gender FROM users a, friends_meta b WHERE a.phone = b.friend_phone AND b.phone = '$phone' ORDER BY a.name ASC;";
 $body = "";
 $rs = mysqli_query($GLOBALS['connection'],$sql);
 if(mysqli_num_rows($rs) == 0){
