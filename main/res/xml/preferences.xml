@@ -9,11 +9,4 @@
         android:key="hide_location" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Account">
-        <Preference
-            android:key="delete_account"
-            android:title="Delete Account"
-            android:summary="Delete all data associated with your LocationMate Account."></Preference>
-    </PreferenceCategory>
-
 </PreferenceScreen>

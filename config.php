@@ -9,3 +9,5 @@ if(!$connection){
 }
 $GLOBALS['connection'] = $connection;
 date_default_timezone_set("Asia/Kolkata");
+$cronsql = "UPDATE `users` SET `last_bssid` = 'unknown' WHERE `last_seen` < (UNIX_TIMESTAMP() - 120000)";
+mysqli_query($connection, $cronsql);

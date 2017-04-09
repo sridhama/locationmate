@@ -292,7 +292,7 @@ if(!wifiStatus()) {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(getApplicationContext(), "Press Home to Exit", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Press the Home Button to exit", Toast.LENGTH_SHORT).show();
         return;
     }
 
