@@ -2,7 +2,7 @@
 
 ### A hassle-free way to find your friends!
 
-LocationMate, as the name suggests, is an Android app to help find the location of your friend within a large campus with WiFi availability (our university in our case). Our app makes it easier to find out the location of a person around the university without much hassle i.e., without involving phone calls, text messaging, etc. We mapped the BSSIDs of numerous wireless access points located throughout our university to unique locations. The app works by finding the BSSID of the nearest access point and retrieving the respective location from our BSSID-location database.
+LocationMate, as the name suggests, is an Android app to help find the location of your friends within a Wi-Fi-enabled campus. The app works by scanning the BSSID of the nearest access point and retrieving the respective location from a pre-populated BSSID-location database. LocationMate uses a cryptographic hash to add friends and also has privacy features for hiding your location.
 
 
 ## Features
